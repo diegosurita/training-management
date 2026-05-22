@@ -5,6 +5,7 @@ import {
   Controller,
   FormProvider,
   useFormContext,
+  type FormProviderProps,
   type ControllerProps,
   type FieldPath,
   type FieldValues,
@@ -13,7 +14,9 @@ import { Slot } from "radix-ui"
 
 import { cn } from "@/lib/utils"
 
-function Form({ children, ...props }: React.ComponentProps<typeof FormProvider>) {
+function Form<
+  TFieldValues extends FieldValues,
+>({ children, ...props }: FormProviderProps<TFieldValues>) {
   return <FormProvider {...props}>{children}</FormProvider>
 }
 

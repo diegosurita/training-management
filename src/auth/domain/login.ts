@@ -1,16 +1,3 @@
-import { z } from "zod"
-
-export const loginCredentialsSchema = z.object({
-  email: z
-    .string()
-    .trim()
-    .min(1, "Email is required")
-    .email("Enter a valid email address"),
-  password: z.string().min(1, "Password is required"),
-})
-
-export type LoginCredentials = z.infer<typeof loginCredentialsSchema>
-
 export type AuthErrorCode =
   | "invalid_credentials"
   | "rate_limited"
@@ -28,6 +15,11 @@ export type AuthSession = {
   refreshToken: string
   tokenType: string
   expiresIn: number
+}
+
+export type LoginCredentials = {
+  email: string
+  password: string
 }
 
 export type LoginResult =

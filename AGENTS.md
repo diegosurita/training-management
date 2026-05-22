@@ -16,14 +16,14 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 # Backend guidelines
 - The backend should be implemented following modular architecture principles in `src` folder. Organize code into modules based on domains.
-- Each module should follow Clean Arhitecture principles, with clear separation of concerns between interfaces, application and infrastructure layers.
+- Each module should follow Clean Architecture principles, with clear separation of concerns between interfaces, application and infrastructure layers.
 - For code that needs to be shared across modules, create a `shared` module that contains common utilities, types, and interfaces. Do not create circular dependencies between modules.
 - Use dependency injection to manage dependencies between modules. Avoid tight coupling and ensure that modules can be easily tested in isolation.
 - Since Next.js does not provide built-in support for dependency injection, do not use any DI frameworks or libraries.
 
 ## Clean Architecture Layers
 Each module should be organized into the following layers:
-- **Interfaces**: This layer defines the public API of the module, including server components, API routes, and any other entry points. It should not contain any business logic or direct database access.
+- **Interfaces**: This layer defines the public API of the module, including server components, server actions, API routes, and any other entry points. It should not contain any business logic or direct database access.
 - **Application**: This layer contains the business logic of the module. It should define use cases and orchestrate interactions between the interfaces and the infrastructure layer. It should not directly access the database or external services.
 - **Domain**: This layer contains the core domain models and business rules. It should be independent of any specific application or infrastructure concerns and should not contain any code related to data access or external services.
 - **Infrastructure**: This layer is responsible for implementing the actual data access and external service interactions.

@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
+import { z } from "zod"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -12,11 +13,18 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import {
-  loginCredentialsSchema,
-  type LoginCredentials,
-} from "@src/auth/domain/login"
-import { loginAction } from "@src/auth/interfaces/login-action"
+import { loginAction } from "@src/auth/interfaces/actions/login.action"
+
+const loginCredentialsSchema = z.object({
+  email: z
+    .string()
+    .trim()
+    .min(1, "Email is required")
+    .email("Enter a valid email address"),
+  password: z.string().min(1, "Password is required"),
+})
+
+type LoginCredentials = z.infer<typeof loginCredentialsSchema>
 
 type LoginFormValues = LoginCredentials
 

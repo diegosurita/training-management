@@ -1,11 +1,7 @@
 import { cookies } from "next/headers"
 
 import type { AuthSession } from "../domain/login"
-
-export const AUTH_ACCESS_TOKEN_COOKIE = "tm-auth-access-token"
-export const AUTH_REFRESH_TOKEN_COOKIE = "tm-auth-refresh-token"
-
-const REFRESH_TOKEN_MAX_AGE = 60 * 60 * 24 * 30
+import { config } from "@src/shared/infrastructure/config"
 
 const cookieOptions = {
   httpOnly: true,
@@ -17,13 +13,13 @@ const cookieOptions = {
 export async function persistSessionCookies(session: AuthSession) {
   const cookieStore = await cookies()
 
-  cookieStore.set(AUTH_ACCESS_TOKEN_COOKIE, session.accessToken, {
+  cookieStore.set(config.cookies.authAccessTokenCookie, session.accessToken, {
     ...cookieOptions,
     maxAge: session.expiresIn,
   })
 
-  cookieStore.set(AUTH_REFRESH_TOKEN_COOKIE, session.refreshToken, {
+  cookieStore.set(config.cookies.authRefreshTokenCookie, session.refreshToken, {
     ...cookieOptions,
-    maxAge: REFRESH_TOKEN_MAX_AGE,
+    maxAge: config.cookies.authRefreshTokenMaxAge,
   })
 }
