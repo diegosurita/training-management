@@ -51,7 +51,8 @@ services:
       GOTRUE_API_HOST: 0.0.0.0
       PORT: 9999
       GOTRUE_DB_DRIVER: postgres
-      GOTRUE_DB_DATABASE_URL: postgresql://postgres:postgres@db:5432/app?sslmode=disable
+      DB_NAMESPACE: auth
+      GOTRUE_DB_DATABASE_URL: postgresql://postgres:postgres@db:5432/app?sslmode=disable&options=-csearch_path%3Dauth%2Cpublic
       GOTRUE_SITE_URL: http://localhost:3000
       GOTRUE_URI_ALLOW_LIST: http://localhost:3000
       GOTRUE_JWT_SECRET: change-me-change-me-change-me-change-me
